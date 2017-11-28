@@ -1,0 +1,11 @@
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\bin\Debug\netcoreapp2.0\Project.deps.json
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\bin\Debug\netcoreapp2.0\Project.runtimeconfig.json
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\bin\Debug\netcoreapp2.0\Project.runtimeconfig.dev.json
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\bin\Debug\netcoreapp2.0\Project.dll
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\bin\Debug\netcoreapp2.0\Project.pdb
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\obj\Debug\netcoreapp2.0\Project.csproj.CoreCompileInputs.cache
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\obj\Debug\netcoreapp2.0\Project.AssemblyInfoInputs.cache
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\obj\Debug\netcoreapp2.0\Project.AssemblyInfo.cs
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\obj\Debug\netcoreapp2.0\Project.dll
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\obj\Debug\netcoreapp2.0\Project.pdb
+C:\Users\superadmin\Desktop\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project\obj\Debug\netcoreapp2.0\Project.csprojResolveAssemblyReference.cache
