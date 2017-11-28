@@ -2,6 +2,17 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
+      "EntityFramework/6.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        },
+        "runtime": {
+          "lib/net45/EntityFramework.SqlServer.dll": {},
+          "lib/net45/EntityFramework.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -445,6 +456,15 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "Microsoft.Web.Xdt/2.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Microsoft.Web.XmlTransform.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Microsoft.Web.XmlTransform.dll": {}
+        }
+      },
       "Microsoft.Win32.Registry/4.4.0-preview1-25305-02": {
         "type": "package",
         "dependencies": {
@@ -482,6 +502,18 @@
         },
         "build": {
           "build/netstandard2.0/NETStandard.Library.targets": {}
+        }
+      },
+      "NuGet.Core/2.14.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Web.Xdt": "2.1.0"
+        },
+        "compile": {
+          "lib/net40-Client/NuGet.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net40-Client/NuGet.Core.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -1145,6 +1177,33 @@
     }
   },
   "libraries": {
+    "EntityFramework/6.2.0": {
+      "sha512": "ptGyXOf26qLrtn+2doAmylIlCxOnBJANwlyyLrXDmqIk9O18IzLWHyxDwwAyhgXkxmbiaA0WNpRy67WRReInBw==",
+      "type": "package",
+      "path": "entityframework/6.2.0",
+      "files": [
+        "content/net40/App.config.transform",
+        "content/net40/Web.config.transform",
+        "entityframework.6.2.0.nupkg.sha512",
+        "entityframework.nuspec",
+        "lib/net40/EntityFramework.SqlServer.dll",
+        "lib/net40/EntityFramework.SqlServer.xml",
+        "lib/net40/EntityFramework.dll",
+        "lib/net40/EntityFramework.xml",
+        "lib/net45/EntityFramework.SqlServer.dll",
+        "lib/net45/EntityFramework.SqlServer.xml",
+        "lib/net45/EntityFramework.dll",
+        "lib/net45/EntityFramework.xml",
+        "tools/EntityFramework.PowerShell.Utility.dll",
+        "tools/EntityFramework.PowerShell.dll",
+        "tools/EntityFramework.psd1",
+        "tools/EntityFramework.psm1",
+        "tools/about_EntityFramework.help.txt",
+        "tools/init.ps1",
+        "tools/install.ps1",
+        "tools/migrate.exe"
+      ]
+    },
     "Microsoft.CSharp/4.3.0": {
       "sha512": "P+MBhIM0YX+JqROuf7i306ZLJEjQYA9uUyRDE+OqwUI5sh41e2ZbPQV3LfAPh+29cmceE1pUffXsGfR4eMY3KA==",
       "type": "package",
@@ -1728,6 +1787,16 @@
         "runtime.json"
       ]
     },
+    "Microsoft.Web.Xdt/2.1.0": {
+      "sha512": "/ieJ02r4MEJM21Eyl+c5kwoJWPhy+qEEcN68JaqDoamabgxJI1jGi/kNLuKvHUCl6tU7E0rMvaR6FmEnDWtS4A==",
+      "type": "package",
+      "path": "microsoft.web.xdt/2.1.0",
+      "files": [
+        "lib/net40/Microsoft.Web.XmlTransform.dll",
+        "microsoft.web.xdt.2.1.0.nupkg.sha512",
+        "microsoft.web.xdt.nuspec"
+      ]
+    },
     "Microsoft.Win32.Registry/4.4.0-preview1-25305-02": {
       "sha512": "zSr8YlZr4ER+4ZdXIKTjWOfb4peT8UgKKqxBELXsJ2KiBSP9898NQP1PIOk0g9Ba14duG13wNjw8Zsy+9isdgQ==",
       "type": "package",
@@ -1900,6 +1969,16 @@
         "lib/netstandard1.0/_._",
         "netstandard.library.2.0.0.nupkg.sha512",
         "netstandard.library.nuspec"
+      ]
+    },
+    "NuGet.Core/2.14.0": {
+      "sha512": "UDXFLVRDepqVqyYxQuxujfaAc7XePdw+Lsey+q36iqTm0nuSU1n9laIGqjokvBl0unifYtjSai7fqBQKKd9BUg==",
+      "type": "package",
+      "path": "nuget.core/2.14.0",
+      "files": [
+        "lib/net40-Client/NuGet.Core.dll",
+        "nuget.core.2.14.0.nupkg.sha512",
+        "nuget.core.nuspec"
       ]
     },
     "Remotion.Linq/2.1.1": {
@@ -4275,10 +4354,12 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "EntityFramework >= 6.2.0",
       "Microsoft.EntityFrameworkCore.Design >= 2.0.0-preview1-final",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.0-preview1-final",
       "Microsoft.EntityFrameworkCore.SqlServer.Design >= 2.0.0-preview1-final",
-      "Microsoft.NETCore.App >= 2.0.0"
+      "Microsoft.NETCore.App >= 2.0.0",
+      "NuGet.Core >= 2.14.0"
     ]
   },
   "packageFolders": {
@@ -4287,6 +4368,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\Users\\superadmin\\Desktop\\C#\\AccessingExistingDatabasesWithEntityFrameworkCore\\Project\\Project.csproj",
       "projectName": "Project",
@@ -4322,14 +4406,18 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
+          "NuGet.Core": {
             "target": "Package",
-            "version": "2.0",
-            "autoReferenced": true
+            "version": "2.14.0"
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "target": "Package",
             "version": "2.0.0-preview1-final"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "2.0",
+            "autoReferenced": true
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
@@ -4338,6 +4426,10 @@
           "Microsoft.EntityFrameworkCore.SqlServer.Design": {
             "target": "Package",
             "version": "2.0.0-preview1-final"
+          },
+          "EntityFramework": {
+            "target": "Package",
+            "version": "6.2.0"
           }
         },
         "imports": [
@@ -4355,6 +4447,36 @@
       "warningLevel": 1,
       "message": "Microsoft.Extensions.Primitives 2.0.0-preview1-final depends on System.Runtime.CompilerServices.Unsafe (>= 4.4.0-preview1-25219-04) but System.Runtime.CompilerServices.Unsafe 4.4.0-preview1-25219-04 was not found. An approximate best match of System.Runtime.CompilerServices.Unsafe 4.4.0-preview1-25305-02 was resolved.",
       "libraryId": "System.Runtime.CompilerServices.Unsafe",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'EntityFramework 6.2.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "EntityFramework",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Web.Xdt 2.1.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.Web.Xdt",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'NuGet.Core 2.14.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "NuGet.Core",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
       ]
