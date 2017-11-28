@@ -1,2 +1,1 @@
-# AccessingExistingDatabasesWithEntityFrameworkCore
-Accessing Existing Databases with Entity Framework Core
+# Accessing Existing Databases with Entity Framework Core
