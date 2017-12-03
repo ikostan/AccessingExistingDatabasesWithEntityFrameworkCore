@@ -19,6 +19,29 @@ namespace Project
             //Displays the results
             //selespeople.ToList().ForEach((p) => Console.WriteLine(p.FirstName + " " + p.LastName));
             selespeople.ToList().ForEach((p) => Console.WriteLine(p.FullName));
+            Console.WriteLine();
+
+            //Default value generation
+            //Get initial data:
+            var customer = context.Customer.First();            //Get first name from DB
+            var salesperson = context.Salesperson.First();      //Get first name from DB
+            var product = context.Product.First();              //Get first product from DB
+
+            //Generate a new order
+            var newOrder = new Order()
+            {
+                Customer = customer,
+                Salesperson = salesperson,
+                OrderItem = { new OrderItem() { Product = product} },
+                OrderDate = DateTime.Now
+            };
+
+            //Save changes into DB
+            context.Add(newOrder);
+            context.SaveChanges();
+
+            //Display the new order data:
+            Console.WriteLine($"Order id: {newOrder.OrderId}, date: {newOrder.CreatedDate}");
 
             //Do not close cmd untill user press enter
             Console.ReadKey();
