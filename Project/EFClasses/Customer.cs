@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Project.EFClasses
 {
@@ -10,15 +11,34 @@ namespace Project.EFClasses
             Order = new HashSet<Order>();
         }
 
+        [DisplayName("Customer Id")]
         public int CustomerId { get; set; }
+
+        [DisplayName("First Name")]
         public string StrFldFirstName { get; set; }
+
+        [DisplayName("Last Name")]
         public string StrFldLastName { get; set; }
+
+        [DisplayName("Email")]
         public string StrFldEmail { get; set; }
+
+        [DisplayName("Phone")]
         public string StrFldPhone { get; set; }
+
+        [DisplayName("Address")]
         public string StrFldAddress { get; set; }
+
+        [DisplayName("City")]
         public string StrFldCity { get; set; }
+
+        [DisplayName("State")]
         public string StrFldState { get; set; }
+
+        [DisplayName("Zip Code")]
         public string StrFldZipcode { get; set; }
+
+        [DisplayName("Full Name")]
         public string CmpLastFirst { get; set; }
 
         public ICollection<Order> Order { get; set; }
