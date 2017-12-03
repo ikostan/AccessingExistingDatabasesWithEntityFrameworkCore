@@ -165,9 +165,20 @@ namespace Project.EFClasses
                     .HasColumnName("SalespersonID")
                     .ValueGeneratedOnAdd();
 
-                entity.Property(e => e.Address).HasColumnType("varchar(50)");
+                //Shadow properties:
 
-                entity.Property(e => e.City).HasColumnType("varchar(50)");
+                //entity.Property(e => e.Address).HasColumnType("varchar(50)");
+                entity.Property<string>("Address").HasColumnType("varchar(50)");
+
+                //entity.Property(e => e.City).HasColumnType("varchar(50)");
+                entity.Property<string>("City").HasColumnType("varchar(50)");
+
+                //entity.Property(e => e.State).HasColumnType("varchar(50)");
+                entity.Property<string>("State").HasColumnType("varchar(50)");
+
+                //entity.Property(e => e.Zipcode).HasColumnType("varchar(50)");
+                entity.Property<string>("Zipcode").HasColumnType("varchar(50)");
+
 
                 entity.Property(e => e.Email).HasColumnType("varchar(50)");
 
@@ -184,9 +195,7 @@ namespace Project.EFClasses
 
                 entity.Property(e => e.SalesGroupType).HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.State).HasColumnType("varchar(50)");
 
-                entity.Property(e => e.Zipcode).HasColumnType("varchar(50)");
 
                 entity.Ignore(e => e.FirstName); //Ignore this field (was created manualy) while maping to DB
 

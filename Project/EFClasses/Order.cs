@@ -38,10 +38,10 @@ namespace Project.EFClasses
         [DisplayName("Order Has Items")]
         public ICollection<OrderItem> OrderItem { get; set; }
 
-        [DisplayName("Customer")]
-        public Customer Customer { get; set; }
+        [DisplayName("Customer")] 
+        public Customer Customer { get; set; } //FK
 
         [DisplayName("Salesperson")]
-        public Salesperson Salesperson { get; set; }
+        public Salesperson Salesperson { get; set; } //FK
     }
 }
