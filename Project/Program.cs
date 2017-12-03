@@ -17,7 +17,8 @@ namespace Project
                     .Where((s) => s.LastName.StartsWith("s"))
                     ;
             //Displays the results
-            selespeople.ToList().ForEach((p) => Console.WriteLine(p.FirstName + " " + p.LastName));
+            //selespeople.ToList().ForEach((p) => Console.WriteLine(p.FirstName + " " + p.LastName));
+            selespeople.ToList().ForEach((p) => Console.WriteLine(p.FullName));
 
             //Do not close cmd untill user press enter
             Console.ReadKey();

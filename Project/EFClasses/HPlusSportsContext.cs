@@ -42,7 +42,7 @@ namespace Project.EFClasses
 
                 entity.Property(e => e.StrFldEmail)
                     .HasColumnName("str_fld_Email")
-                    .HasColumnType("varchar(50)");
+                    .HasColumnType("varchar(250)");
 
                 entity.Property(e => e.StrFldFirstName)
                     .HasColumnName("str_fld_FirstName")
@@ -188,11 +188,14 @@ namespace Project.EFClasses
 
                 entity.Property(e => e.Zipcode).HasColumnType("varchar(50)");
 
+                entity.Ignore(e => e.FirstName); //Ignore this field (was created manualy) while maping to DB
+
                 entity.HasOne(d => d.SalespersonNavigation)
                     .WithOne(p => p.InverseSalespersonNavigation)
                     .HasForeignKey<Salesperson>(d => d.SalespersonId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Salesperson_Salesperson");
+
             });
         }
     }

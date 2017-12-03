@@ -22,6 +22,8 @@ namespace Project.EFClasses
         public string SalesGroupState { get; set; }
         public int SalesGroupType { get; set; }
 
+        public string FullName { get { return FirstName + " " + LastName; } }
+
         public ICollection<Order> Order { get; set; }
         public Salesperson SalespersonNavigation { get; set; }
         public Salesperson InverseSalespersonNavigation { get; set; }
