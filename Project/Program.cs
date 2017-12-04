@@ -15,14 +15,59 @@ namespace Project
             Program prg = new Program();
             prg.context = new HPlusSportsContext();
 
-            
+            try
+            {
+                //prg.GetPersonsStartsFromS();
+
+                //prg.GenerateNewOrder();
+
+                prg.UsingConcurrencyTokensSample();
+            }
+            catch (Exception ex)
+            {
+                //Show error
+                prg.DisplayError(ex.Message);
+            }
 
             //Do not close cmd untill user press enter
             Console.ReadKey();
         }
 
         /// <summary>
-        /// get all sales persons with the name starts from "s"
+        /// Display error
+        /// </summary>
+        /// <param name="error"></param>
+        private void DisplayError(string error)
+        {
+            ConsoleColor defaultBackGroundColor = Console.BackgroundColor;
+            ConsoleColor defaultForeGroundColor = Console.BackgroundColor;
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine($"\n{error}\n");
+
+            Console.ForegroundColor = defaultForeGroundColor;
+            Console.BackgroundColor = defaultBackGroundColor;
+        }
+
+        /// <summary>
+        /// Sample of usage concurrency tokens and timestamps
+        /// Show case for concurrency conflict
+        /// </summary>
+        private void UsingConcurrencyTokensSample()
+        {
+            //Get an order
+            var lastOrder = context.Order.Last();
+
+            //Update an order, set a new customer id
+            lastOrder.CustomerId = 101;
+
+            //Save changes into DB
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Get all sales persons with the name starts from "s"
         /// </summary>
         /// <param name="context"></param>
         private void GetPersonsStartsFromS()
