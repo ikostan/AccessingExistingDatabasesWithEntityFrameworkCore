@@ -16,27 +16,27 @@ Source: https://www.lynda.com/Entity-Framework-tutorials
 
 ## How to generate concurrency error:<br/>
 
-### A. In order to create concurrency token (in this example it will be [dbo].[Order].[LastUpdate]) please do the following:<br/>
+### A. In order to create concurrency token (in this example it will be ```[dbo].[Order].[LastUpdate]```) please do the following:<br/>
 1. Go to data model class ("HPlusSportsContext.cs")<br/>
 2. Edit ".LastUpdate" property (add '.IsConcurrencyToken()'), see below:<br/>
 ```
-entity.Property(e => e.LastUpdate)<br/>
-                    .IsRequired()<br/>
-                    .HasColumnType("timestamp")<br/>
-                    .IsConcurrencyToken()<br/>
-                    .ValueGeneratedOnAddOrUpdate();<br/>
-```
+entity.Property(e => e.LastUpdate)
+                    .IsRequired()
+                    .HasColumnType("timestamp")
+                    .IsConcurrencyToken()
+                    .ValueGeneratedOnAddOrUpdate();```<br/>
+
 ### NOTE: ```[LastUpdate] [timestamp] NOT NULL``` <br/><br/>
 
 ### B. In order to generate the error please do the following:<br/>
 1. Wrrite code that updates some order, see below:<br/>
-			```//Get an order<br/>
+			```//Get an order
             var lastOrder = context.Order.Last();<br/>
-			<br/>
-            //Update an order, set a new customer id<br/>
-            lastOrder.CustomerId = 101;<br/>
-			<br/>
-            //Save changes into DB<br/>
+			
+            //Update an order, set a new customer id
+            lastOrder.CustomerId = 101;
+			
+            //Save changes into DB
             context.SaveChanges();```<br/><br/>
 2. Set break-point on "context.SaveChanges()", see screenshot 1<br/>
 3. Run the program<br/>
