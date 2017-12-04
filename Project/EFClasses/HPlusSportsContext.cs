@@ -85,6 +85,7 @@ namespace Project.EFClasses
                 entity.Property(e => e.LastUpdate)
                     .IsRequired()
                     .HasColumnType("timestamp")
+                    .IsConcurrencyToken()
                     .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
