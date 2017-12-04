@@ -33,7 +33,7 @@ entity.Property(e => e.LastUpdate)
 1. Wrrite code that updates some order, see below:<br/>
 ```
 			//Get an order
-            var lastOrder = context.Order.Last();<br/>
+            var lastOrder = context.Order.Last();
 			
             //Update an order, set a new customer id
             lastOrder.CustomerId = 101;
