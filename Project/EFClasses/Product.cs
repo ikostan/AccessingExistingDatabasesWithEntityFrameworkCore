@@ -16,9 +16,12 @@ namespace Project.EFClasses
         public string Variety { get; set; }
         public decimal? Price { get; set; }
         public string Status { get; set; }
-        public bool Perishable { get; set; }
-        public int? ExpirationDays { get; set; }
-        public bool? Refrigerated { get; set; }
+
+        //Transfered to PerishableProduct.cs
+        //public int? ExpirationDays { get; set; }
+        //public bool? Refrigerated { get; set; }
+        //public bool Perishable { get; set; } //This field hasbeen removed since we do not need it anymore
+
 
         public ICollection<OrderItem> OrderItem { get; set; }
     }
