@@ -155,7 +155,8 @@ namespace Project.EFClasses
                 //See Discriminator above (no longer need this definition)
                 //entity.Property(e => e.Perishable).HasDefaultValueSql("((0))");
 
-                //Default value
+                //Default value for this property
+                //Added in order not to include it into migration model
                 entity.Property<bool>("Perishable").HasDefaultValueSql("0");
 
                 entity.Property(e => e.Price).HasColumnType("money");
