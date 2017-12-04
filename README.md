@@ -63,7 +63,10 @@ entity.Property(e => e.LastUpdate)
 ```
 cd C:\Users\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project
 ```
-- In order to update DB run: dotnet ef database update<br/>
+- In order to update DB run: 
+```
+dotnet ef database update
+```
 - In order to update DB from specific migration run: 
 ```
 dotnet ef database update <migration_name>
