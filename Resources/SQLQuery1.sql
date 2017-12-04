@@ -1,0 +1,1 @@
+﻿UPDATE [dbo].[Order] SET Status = 'canceled' WHERE OrderID = 1208;

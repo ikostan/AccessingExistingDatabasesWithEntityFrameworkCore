@@ -13,3 +13,40 @@ Creating complex relationships<br/>
 Working with non-Microsoft databases such as SQLite and PostgreSQL<br/>
 
 Source: https://www.lynda.com/Entity-Framework-tutorials
+
+## How to generate concurrency error:<br/>
+
+A. In order to create concurrency token (in this example it will be [dbo].[Order].[LastUpdate]) please do the following:<br/>
+1. Go to data model class ("HPlusSportsContext.cs")<br/>
+2. Edit ".LastUpdate" property (add '.IsConcurrencyToken()'), see below:<br/>
+
+entity.Property(e => e.LastUpdate)<br/>
+                    .IsRequired()<br/>
+                    .HasColumnType("timestamp")<br/>
+                    .IsConcurrencyToken()<br/>
+                    .ValueGeneratedOnAddOrUpdate();<br/><br/>
+B. In order to generate the error please do the following:<br/>
+1. Wrrite code that updates some order, see below:<br/>
+			//Get an order<br/>
+            var lastOrder = context.Order.Last();<br/>
+			<br/>
+            //Update an order, set a new customer id<br/>
+            lastOrder.CustomerId = 101;<br/>
+			<br/>
+            //Save changes into DB<br/>
+            context.SaveChanges();<br/><br/>
+2. Set break-point on "context.SaveChanges()", see screenshot 1<br/>
+3. Run the program<br/>
+4. When the programm stops on break-point, run following quaery: "UPDATE [dbo].[Order] SET Status = 'canceled' WHERE OrderID = <order_id>;"
+5. Continue to run the program<br/>
+6. Verify an error message, see screenshot 3<br/>
+
+
+### Screenshot 1:
+![GUI](https://github.com/ikostan/AccessingExistingDatabasesWithEntityFrameworkCore/blob/master/Img/concurrency_error_1.PNG?raw=true "GUI screenshot")
+
+### Screenshot 2:
+![GUI](https://github.com/ikostan/AccessingExistingDatabasesWithEntityFrameworkCore/blob/master/Img/concurrency_error_2.PNG?raw=true "GUI screenshot")
+
+### Screenshot 3:
+![GUI](https://github.com/ikostan/AccessingExistingDatabasesWithEntityFrameworkCore/blob/master/Img/concurrency_error_3.PNG?raw=true "GUI screenshot")
