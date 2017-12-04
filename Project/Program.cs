@@ -24,6 +24,8 @@ namespace Project
             //Default value generation
             //Get initial data:
             var customer = context.Customer.First();            //Get first name from DB
+            customer.StrFldEmail = "CAPITAL@LETTERS.COM";
+
             var salesperson = context.Salesperson.First();      //Get first name from DB
             var product = context.Product.First();              //Get first product from DB
 
