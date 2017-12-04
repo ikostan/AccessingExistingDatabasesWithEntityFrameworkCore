@@ -21,7 +21,9 @@ namespace Project
 
                 //prg.GenerateNewOrder();
 
-                prg.UsingConcurrencyTokensSample();
+                //prg.UsingConcurrencyTokensSample();
+
+
             }
             catch (Exception ex)
             {
@@ -34,7 +36,7 @@ namespace Project
         }
 
         /// <summary>
-        /// Display error
+        /// Display error (red text on yellow background)
         /// </summary>
         /// <param name="error"></param>
         private void DisplayError(string error)
