@@ -173,6 +173,12 @@ namespace Project.EFClasses
                 entity.Property(e => e.State)
                     .IsRequired()
                     .HasMaxLength(2);
+
+                //Relationships between salesperson and SalesGroup. 
+                //Has principal key instead of FK since there is no actual relationships between those tables.
+                entity.HasMany((e) => e.SalesPeople)
+                .WithOne((s) => s.SalesGroup)
+                .HasPrincipalKey((o) => new { o.State, o.Type});
             });
 
             modelBuilder.Entity<Salesperson>(entity =>
