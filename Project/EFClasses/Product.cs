@@ -7,7 +7,7 @@ namespace Project.EFClasses
     {
         public Product()
         {
-            OrderItem = new HashSet<OrderItem>();
+            //OrderItem = new HashSet<OrderItem>();
         }
 
         public string ProductId { get; set; }
@@ -22,7 +22,7 @@ namespace Project.EFClasses
         //public bool? Refrigerated { get; set; }
         //public bool Perishable { get; set; } //This field hasbeen removed since we do not need it anymore
 
-
-        public ICollection<OrderItem> OrderItem { get; set; }
+        //Product does not have to reference orders. For that reason this field is removed
+        //public ICollection<OrderItem> OrderItem { get; set; }
     }
 }

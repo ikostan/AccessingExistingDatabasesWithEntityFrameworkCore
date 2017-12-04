@@ -5,9 +5,7 @@ namespace Project.EFClasses
 {
     public partial class PerishableProduct : Product
     {
-
         public int? ExpirationDays { get; set; }
         public bool? Refrigerated { get; set; }
-
     }
 }

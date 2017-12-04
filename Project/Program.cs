@@ -27,7 +27,7 @@ namespace Project
 
                 //prg.UsingConcurrencyTokensSample();
 
-                prg.TestPerishable();
+                //prg.TestPerishable();
             }
             catch (Exception ex)
             {
