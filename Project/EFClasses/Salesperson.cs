@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Project.EFClasses
 {
@@ -10,10 +11,19 @@ namespace Project.EFClasses
             Order = new HashSet<Order>();
         }
 
+        [DisplayName("Sales Person Id")]
         public int SalespersonId { get; set; }
+
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
+
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
+
+        [DisplayName("Email")]
         public string Email { get; set; }
+
+        [DisplayName("Phone")]
         public string Phone { get; set; }
 
         //Shadow properties:
@@ -25,6 +35,7 @@ namespace Project.EFClasses
         public string SalesGroupState { get; set; }
         public int SalesGroupType { get; set; }
 
+        [DisplayName("Full Name")]
         public string FullName { get { return FirstName + " " + LastName; } }
 
         public ICollection<Order> Order { get; set; }
