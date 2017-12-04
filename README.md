@@ -57,3 +57,10 @@ entity.Property(e => e.LastUpdate)
 
 ### Screenshot 3:
 ![GUI](https://github.com/ikostan/AccessingExistingDatabasesWithEntityFrameworkCore/blob/master/Img/concurrency_error_3.PNG?raw=true "GUI screenshot")
+
+## How to run migrations from CMD:<br/>
+- Open CMD and navigate to project folder, for example: cd C:\Users\C#\AccessingExistingDatabasesWithEntityFrameworkCore\Project<br/>
+- In order to update DB run: dotnet ef database update<br/>
+- In order to update DB from specific migration run: dotnet ef database update <migration_name><br/>
+- In order to create a new migration run following command: dotnet ef migrations add <migration_name><br/>
+- To undo this action, use 'ef migrations remove'<br/>
