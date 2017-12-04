@@ -40,7 +40,7 @@ namespace Project
         }
 
         /// <summary>
-        /// 
+        /// Test PerishableProduct class 
         /// </summary>
         private void TestPerishable()
         {
