@@ -1,5 +1,6 @@
 ﻿using Project.EFClasses;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Project
@@ -28,6 +29,10 @@ namespace Project
                 //prg.UsingConcurrencyTokensSample();
 
                 //prg.TestPerishable();
+
+                //prg.NavigationDemo("CA");
+                //prg.NavigationDemo(120);
+
             }
             catch (Exception ex)
             {
@@ -37,6 +42,56 @@ namespace Project
 
             //Do not close cmd untill user press enter
             Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Navigation between entities.
+        /// Filter by salesperson id
+        /// In this method we will connect product with orders via sales-person.
+        /// </summary>
+        private void NavigationDemo(int id)
+        {
+            //Header
+            ChangeDefaultColorSchema();
+            Console.WriteLine("Get all orders done by salesperson with a specific id");
+            SetDefaultColorSchema();
+
+            //Get all orders done by salesperson from a specific state
+            var orders =
+                context.Order
+                    .Include((o) => o.OrderItem)
+                    .ThenInclude((oi) => oi.Product)
+                    .Where((p) => p.SalespersonId == id)
+                    .ToList()
+                ;
+
+            //Show the results:
+            orders.ForEach((e) => Console.WriteLine($"id: {e.OrderId}"));
+        }
+
+        /// <summary>
+        /// Navigation between entities.
+        /// Filter by State
+        /// In this method we will connect product with orders via sales-person.
+        /// </summary>
+        private void NavigationDemo(string state)
+        {
+            //Header
+            ChangeDefaultColorSchema();
+            Console.WriteLine("Get all orders done by salesperson from specific state:");
+            SetDefaultColorSchema();
+
+            //Get all orders per specific salseperson id
+            var orders =
+                context.Order
+                    .Include((o) => o.OrderItem)
+                    .ThenInclude((oi) => oi.Product)
+                    .Where((p) => p.Salesperson.SalesGroupState == state)
+                    .ToList()
+                ;
+
+            //Show the results:
+            orders.ForEach((e) => Console.WriteLine($"id: {e.OrderId}"));
         }
 
         /// <summary>
