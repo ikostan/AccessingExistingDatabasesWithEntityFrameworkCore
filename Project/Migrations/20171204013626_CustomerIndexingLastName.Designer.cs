@@ -9,9 +9,10 @@ using System;
 namespace Project.Migrations
 {
     [DbContext(typeof(HPlusSportsContext))]
-    partial class HPlusSportsContextModelSnapshot : ModelSnapshot
+    [Migration("20171204013626_CustomerIndexingLastName")]
+    partial class CustomerIndexingLastName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.0-preview1-24937")

@@ -49,6 +49,9 @@ namespace Project.EFClasses
                     .HasColumnName("str_fld_FirstName")
                     .HasColumnType("varchar(50)");
 
+                //Indexing on last name
+                entity.HasIndex((e) => e.StrFldLastName);
+
                 entity.Property(e => e.StrFldLastName)
                     .HasColumnName("str_fld_LastName")
                     .HasColumnType("varchar(50)");
