@@ -16,7 +16,7 @@ Source: https://www.lynda.com/Entity-Framework-tutorials
 
 ## How to generate concurrency error:<br/>
 
-A. In order to create concurrency token (in this example it will be [dbo].[Order].[LastUpdate]) please do the following:<br/>
+### A. In order to create concurrency token (in this example it will be [dbo].[Order].[LastUpdate]) please do the following:<br/>
 1. Go to data model class ("HPlusSportsContext.cs")<br/>
 2. Edit ".LastUpdate" property (add '.IsConcurrencyToken()'), see below:<br/>
 
@@ -25,7 +25,7 @@ entity.Property(e => e.LastUpdate)<br/>
                     .HasColumnType("timestamp")<br/>
                     .IsConcurrencyToken()<br/>
                     .ValueGeneratedOnAddOrUpdate();<br/><br/>
-B. In order to generate the error please do the following:<br/>
+### B. In order to generate the error please do the following:<br/>
 1. Wrrite code that updates some order, see below:<br/>
 			//Get an order<br/>
             var lastOrder = context.Order.Last();<br/>
