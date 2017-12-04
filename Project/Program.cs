@@ -59,11 +59,17 @@ namespace Project
             //Get an order
             var lastOrder = context.Order.Last();
 
+            //Display original data
+            Console.WriteLine($"Original customer id: {lastOrder.CustomerId}");
+
             //Update an order, set a new customer id
-            lastOrder.CustomerId = 101;
+            lastOrder.CustomerId = lastOrder.CustomerId - 1;
 
             //Save changes into DB
             context.SaveChanges();
+
+            //Display updated data
+            Console.WriteLine($"Updated customer id: {lastOrder.CustomerId}");
         }
 
         /// <summary>
@@ -81,7 +87,6 @@ namespace Project
             //Displays the results
             //selespeople.ToList().ForEach((p) => Console.WriteLine(p.FirstName + " " + p.LastName));
             selespeople.ToList().ForEach((p) => Console.WriteLine(p.FullName));
-            Console.WriteLine();
         }
 
         /// <summary>
