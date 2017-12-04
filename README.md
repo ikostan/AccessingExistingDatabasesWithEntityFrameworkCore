@@ -16,7 +16,7 @@ Source: https://www.lynda.com/Entity-Framework-tutorials
 
 ## How to generate concurrency error:<br/>
 
-### A. In order to create concurrency token (in this example it will be ```[dbo].[Order].[LastUpdate]```) please do the following:<br/>
+### A. In order to create concurrency token (in this example it will be [dbo].[Order].[LastUpdate]) please do the following:<br/>
 1. Go to data model class ("HPlusSportsContext.cs")<br/>
 2. Edit ".LastUpdate" property (add '.IsConcurrencyToken()'), see below:<br/>
 ```
@@ -24,9 +24,9 @@ entity.Property(e => e.LastUpdate)
                     .IsRequired()
                     .HasColumnType("timestamp")
                     .IsConcurrencyToken()
-                    .ValueGeneratedOnAddOrUpdate();```<br/>
+                    .ValueGeneratedOnAddOrUpdate();```
 
-### NOTE: ```[LastUpdate] [timestamp] NOT NULL``` <br/><br/>
+### NOTE: [LastUpdate] [timestamp] NOT NULL <br/><br/>
 
 ### B. In order to generate the error please do the following:<br/>
 1. Wrrite code that updates some order, see below:<br/>
@@ -37,7 +37,8 @@ entity.Property(e => e.LastUpdate)
             lastOrder.CustomerId = 101;
 			
             //Save changes into DB
-            context.SaveChanges();```<br/><br/>
+            context.SaveChanges();```
+
 2. Set break-point on "context.SaveChanges()", see screenshot 1<br/>
 3. Run the program<br/>
 4. When the programm stops on break-point, run following quaery: "UPDATE [dbo].[Order] SET Status = 'canceled' WHERE OrderID = <order_id>;"
