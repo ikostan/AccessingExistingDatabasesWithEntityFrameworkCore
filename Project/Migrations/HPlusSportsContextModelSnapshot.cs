@@ -84,7 +84,6 @@ namespace Project.Migrations
                         .HasColumnName("CustomerID");
 
                     b.Property<byte[]>("LastUpdate")
-                        .IsConcurrencyToken()
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp");
@@ -148,13 +147,19 @@ namespace Project.Migrations
                         .HasColumnName("ProductID")
                         .HasMaxLength(10);
 
-                    b.Property<bool>("Perishable");
+                    b.Property<int?>("ExpirationDays");
+
+                    b.Property<bool>("Perishable")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("((0))");
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("money");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("varchar(50)");
+
+                    b.Property<bool?>("Refrigerated");
 
                     b.Property<int?>("Size");
 
@@ -167,8 +172,6 @@ namespace Project.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Product");
-
-                    b.HasDiscriminator<bool>("Perishable").HasValue(false);
                 });
 
             modelBuilder.Entity("Project.EFClasses.SalesGroup", b =>
@@ -214,10 +217,12 @@ namespace Project.Migrations
 
                     b.Property<string>("SalesGroupState")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("(N'CA')")
                         .HasMaxLength(2);
 
                     b.Property<int>("SalesGroupType")
+                        .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("((1))");
 
                     b.Property<string>("State")
@@ -228,22 +233,7 @@ namespace Project.Migrations
 
                     b.HasKey("SalespersonId");
 
-                    b.HasIndex("SalesGroupState", "SalesGroupType");
-
                     b.ToTable("Salesperson");
-                });
-
-            modelBuilder.Entity("Project.EFClasses.PerishableProduct", b =>
-                {
-                    b.HasBaseType("Project.EFClasses.Product");
-
-                    b.Property<int?>("ExpirationDays");
-
-                    b.Property<bool?>("Refrigerated");
-
-                    b.ToTable("PerishableProduct");
-
-                    b.HasDiscriminator().HasValue(true);
                 });
 
             modelBuilder.Entity("Project.EFClasses.Order", b =>
@@ -267,18 +257,17 @@ namespace Project.Migrations
                         .HasConstraintName("FK_OrderItem_Order");
 
                     b.HasOne("Project.EFClasses.Product", "Product")
-                        .WithMany()
+                        .WithMany("OrderItem")
                         .HasForeignKey("ProductId")
                         .HasConstraintName("FK_OrderItem_Product1");
                 });
 
             modelBuilder.Entity("Project.EFClasses.Salesperson", b =>
                 {
-                    b.HasOne("Project.EFClasses.SalesGroup", "SalesGroup")
-                        .WithMany("SalesPeople")
-                        .HasForeignKey("SalesGroupState", "SalesGroupType")
-                        .HasPrincipalKey("State", "Type")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("Project.EFClasses.Salesperson", "SalespersonNavigation")
+                        .WithOne("InverseSalespersonNavigation")
+                        .HasForeignKey("Project.EFClasses.Salesperson", "SalespersonId")
+                        .HasConstraintName("FK_Salesperson_Salesperson");
                 });
         }
     }
