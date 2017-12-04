@@ -133,7 +133,8 @@ namespace Project.EFClasses
                     .HasConstraintName("FK_OrderItem_Order");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany(p => p.OrderItem)
+                    //.WithMany(p => p.OrderItem) //commented out since this navigation is no longer exist. Replaced by empty .WithMany() navigation
+                    .WithMany()
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_OrderItem_Product1");
