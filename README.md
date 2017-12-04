@@ -25,6 +25,9 @@ entity.Property(e => e.LastUpdate)<br/>
                     .HasColumnType("timestamp")<br/>
                     .IsConcurrencyToken()<br/>
                     .ValueGeneratedOnAddOrUpdate();<br/><br/>
+
+### NOTE: [LastUpdate] [timestamp] NOT NULL <br/>
+
 ### B. In order to generate the error please do the following:<br/>
 1. Wrrite code that updates some order, see below:<br/>
 			//Get an order<br/>
