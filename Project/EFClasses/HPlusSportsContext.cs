@@ -42,7 +42,8 @@ namespace Project.EFClasses
 
                 entity.Property(e => e.StrFldEmail)
                     .HasColumnName("str_fld_Email")
-                    .HasColumnType("varchar(250)");
+                    .HasColumnType("varchar(250)")
+                    .HasAnnotation("BackingField", "_email");
 
                 entity.Property(e => e.StrFldFirstName)
                     .HasColumnName("str_fld_FirstName")

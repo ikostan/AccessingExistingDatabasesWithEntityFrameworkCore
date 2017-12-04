@@ -20,8 +20,14 @@ namespace Project.EFClasses
         [DisplayName("Last Name")]
         public string StrFldLastName { get; set; }
 
+        //Backing field
+        private string _email;
+
         [DisplayName("Email")]
-        public string StrFldEmail { get; set; }
+        public string StrFldEmail {
+            get { return _email; }
+            set { _email = value.ToLower(); }
+        }
 
         [DisplayName("Phone")]
         public string StrFldPhone { get; set; }
