@@ -6,21 +6,44 @@ namespace Project
 {
     class Program
     {
+        //DB model object
+        private HPlusSportsContext context;
+
         static void Main(string[] args)
         {
             //Instantiate context object
-            var context = new HPlusSportsContext();
+            Program prg = new Program();
+            prg.context = new HPlusSportsContext();
 
+            
+
+            //Do not close cmd untill user press enter
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// get all sales persons with the name starts from "s"
+        /// </summary>
+        /// <param name="context"></param>
+        private void GetPersonsStartsFromS()
+        {
             //Run quaery in order to get all sales persons with the name starts from "s"
             var selespeople =
                 context.Salesperson
                     .Where((s) => s.LastName.StartsWith("s"))
                     ;
+
             //Displays the results
             //selespeople.ToList().ForEach((p) => Console.WriteLine(p.FirstName + " " + p.LastName));
             selespeople.ToList().ForEach((p) => Console.WriteLine(p.FullName));
             Console.WriteLine();
+        }
 
+        /// <summary>
+        /// Generate a new order using default value for DateTime
+        /// </summary>
+        private void GenerateNewOrder()
+        { 
             //Default value generation
             //Get initial data:
             var customer = context.Customer.First();            //Get first name from DB
@@ -34,7 +57,7 @@ namespace Project
             {
                 Customer = customer,
                 Salesperson = salesperson,
-                OrderItem = { new OrderItem() { Product = product} },
+                OrderItem = { new OrderItem() { Product = product } },
                 OrderDate = DateTime.Now
             };
 
@@ -44,9 +67,8 @@ namespace Project
 
             //Display the new order data:
             Console.WriteLine($"Order id: {newOrder.OrderId}, date: {newOrder.CreatedDate}");
-
-            //Do not close cmd untill user press enter
-            Console.ReadKey();
         }
+
+        //End of class
     }
 }
