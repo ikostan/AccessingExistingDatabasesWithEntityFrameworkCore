@@ -39,7 +39,12 @@ namespace Project.EFClasses
         public string FullName { get { return FirstName + " " + LastName; } }
 
         public ICollection<Order> Order { get; set; }
-        public Salesperson SalespersonNavigation { get; set; }
-        public Salesperson InverseSalespersonNavigation { get; set; }
+
+        //Commented out since those properties navigate to exact same entity
+        //public Salesperson SalespersonNavigation { get; set; }
+        //public Salesperson InverseSalespersonNavigation { get; set; }
+
+        //Navigation property for SalesGroup
+        public virtual SalesGroup SalesGroup { get; set; }
     }
 }

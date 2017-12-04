@@ -212,14 +212,14 @@ namespace Project.EFClasses
                 entity.Property(e => e.SalesGroupType).HasDefaultValueSql("((1))");
 
 
-
                 entity.Ignore(e => e.FirstName); //Ignore this field (was created manualy) while maping to DB
 
-                entity.HasOne(d => d.SalespersonNavigation)
-                    .WithOne(p => p.InverseSalespersonNavigation)
-                    .HasForeignKey<Salesperson>(d => d.SalespersonId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Salesperson_Salesperson");
+                //This navigation key is removed because it points to himself
+                //entity.HasOne(d => d.SalespersonNavigation)
+                //    .WithOne(p => p.InverseSalespersonNavigation)
+                //    .HasForeignKey<Salesperson>(d => d.SalespersonId)
+                //    .OnDelete(DeleteBehavior.Restrict)
+                //    .HasConstraintName("FK_Salesperson_Salesperson");
 
             });
         }
