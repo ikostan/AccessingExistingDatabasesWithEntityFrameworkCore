@@ -9,6 +9,10 @@ namespace Project
         //DB model object
         private HPlusSportsContext context;
 
+        //Color schema
+        private ConsoleColor defaultBackGroundColor;
+        private ConsoleColor defaultForeGroundColor;
+
         static void Main(string[] args)
         {
             //Instantiate context object
@@ -23,7 +27,7 @@ namespace Project
 
                 //prg.UsingConcurrencyTokensSample();
 
-
+                prg.TestPerishable();
             }
             catch (Exception ex)
             {
@@ -36,20 +40,61 @@ namespace Project
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        private void TestPerishable()
+        {
+            //Get all Perishable Products from DB and convert data collection to list:
+            var perishableProduct = context.PerishableProduct.ToList();
+
+            //Change default color schema:
+            ChangeDefaultColorSchema();
+
+            //Display header:
+            Console.WriteLine(String.Format("{0,-10} | {1,-8} | {2,-8} | {3,-10} |", "variety", "id", "name", "expiration"));
+
+            //Change back to default colors:
+            SetDefaultColorSchema();
+
+            Console.WriteLine($"-----------------------------------------------");
+
+            //Loop in order to display:
+            perishableProduct
+                .ForEach((e) => 
+                    Console.WriteLine($"{e.Variety, -10} | {e.ProductId, -8} | {e.ProductName, -8} | {e.ExpirationDays, 10} |"));
+        }
+
+        /// <summary>
+        /// Change back to default colors
+        /// </summary>
+        private void SetDefaultColorSchema()
+        {
+            Console.ForegroundColor = defaultForeGroundColor;
+            Console.BackgroundColor = defaultBackGroundColor;
+        }
+
+        /// <summary>
+        /// Change default color schema
+        /// </summary>
+        private void ChangeDefaultColorSchema()
+        {
+            defaultBackGroundColor = Console.BackgroundColor;
+            defaultForeGroundColor = Console.ForegroundColor;
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Red;
+        }
+
+        /// <summary>
         /// Display error (red text on yellow background)
         /// </summary>
         /// <param name="error"></param>
         private void DisplayError(string error)
         {
-            ConsoleColor defaultBackGroundColor = Console.BackgroundColor;
-            ConsoleColor defaultForeGroundColor = Console.BackgroundColor;
-            Console.BackgroundColor = ConsoleColor.Yellow;
-            Console.ForegroundColor = ConsoleColor.Red;
+            ChangeDefaultColorSchema();
 
             Console.WriteLine($"\n{error}\n");
 
-            Console.ForegroundColor = defaultForeGroundColor;
-            Console.BackgroundColor = defaultBackGroundColor;
+            SetDefaultColorSchema();
         }
 
         /// <summary>
