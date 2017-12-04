@@ -9,9 +9,12 @@ namespace Project.EFClasses
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderItem> OrderItem { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<SalesGroup> SalesGroup { get; set; }
         public virtual DbSet<Salesperson> Salesperson { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+
+        //PerishableProduct is custom class, extends from Product
+        public virtual DbSet<PerishableProduct> PerishableProduct { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -142,7 +145,14 @@ namespace Project.EFClasses
                     .HasColumnName("ProductID")
                     .HasMaxLength(10);
 
-                entity.Property(e => e.Perishable).HasDefaultValueSql("((0))");
+                //Must be added manualy cince we separated between Perishable and Product
+                entity.HasDiscriminator<bool>("Perishable")
+                    .HasValue<Product>(false)
+                    .HasValue<PerishableProduct>(true)
+                ;
+
+                //See Discriminator above (no longer need this definition)
+                //entity.Property(e => e.Perishable).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
