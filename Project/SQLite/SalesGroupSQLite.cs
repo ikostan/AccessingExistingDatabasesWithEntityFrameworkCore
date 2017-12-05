@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Project.SQLite
 {
@@ -10,6 +11,7 @@ namespace Project.SQLite
             SalesPeopleSQLite = new HashSet<SalespersonSQLite>();
         }
 
+        [Key]
         public int Id { get; set; }
         public string State { get; set; }
         public int Type { get; set; }

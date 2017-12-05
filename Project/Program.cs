@@ -3,13 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.IO;
+using Project.SQLite;
 
 namespace Project
 {
     class Program
     {
         //DB model object
-        private HPlusSportsContext context;
+        private HPlusSportsContext context;// MS SQL
+        private SQLiteDBContext contextSQLite;//SQLite
 
         //Color schema
         private ConsoleColor defaultBackGroundColor;
@@ -19,7 +21,8 @@ namespace Project
         {
             //Instantiate context object
             Program prg = new Program();
-            prg.context = new HPlusSportsContext();
+            //prg.context = new HPlusSportsContext(); //MS SQL context
+            prg.contextSQLite = new SQLiteDBContext(); //SQLite context
 
             try
             {
