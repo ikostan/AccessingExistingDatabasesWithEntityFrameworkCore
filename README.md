@@ -12,7 +12,9 @@ Not every .NET development project starts from scratch. Often you're rewriting a
 * Creating complex relationships
 * Working with non-Microsoft databases such as SQLite<br/>
 
-Source: https://www.lynda.com/Entity-Framework-tutorials
+Source: https://www.lynda.com/Entity-Framework-tutorials <br/>
+
+Entity Framework Core: https://docs.microsoft.com/en-us/ef/core/ <br/>
 
 ## How to generate concurrency error:<br/>
 
