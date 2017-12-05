@@ -3802,6 +3802,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\Users\\superadmin\\Desktop\\C#\\AccessingExistingDatabasesWithEntityFrameworkCore\\Project\\Project.csproj",
       "projectName": "Project",
@@ -3837,16 +3840,24 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "NuGet.Core": {
+            "target": "Package",
+            "version": "2.14.0"
+          },
+          "Microsoft.EntityFrameworkCore.Sqlite.Design": {
+            "target": "Package",
+            "version": "2.0.0-preview1-final"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "target": "Package",
+            "version": "2.0.1"
+          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "2.0",
             "autoReferenced": true
           },
-          "EntityFramework": {
-            "target": "Package",
-            "version": "6.2.0"
-          },
-          "Microsoft.EntityFrameworkCore.Design": {
+          "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
             "version": "2.0.1"
           },
@@ -3858,17 +3869,9 @@
             "target": "Package",
             "version": "2.0.0-preview1-final"
           },
-          "Microsoft.EntityFrameworkCore.Sqlite": {
+          "EntityFramework": {
             "target": "Package",
-            "version": "2.0.1"
-          },
-          "Microsoft.EntityFrameworkCore.Sqlite.Design": {
-            "target": "Package",
-            "version": "2.0.0-preview1-final"
-          },
-          "NuGet.Core": {
-            "target": "Package",
-            "version": "2.14.0"
+            "version": "6.2.0"
           }
         },
         "imports": [

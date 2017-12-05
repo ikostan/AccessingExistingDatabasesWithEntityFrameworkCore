@@ -21,7 +21,7 @@ namespace Project
         {
             //Instantiate context object
             Program prg = new Program();
-            //prg.context = new HPlusSportsContext(); //MS SQL context
+            prg.context = new HPlusSportsContext(); //MS SQL context
             prg.contextSQLite = new SQLiteDBContext(); //SQLite context
 
             try
@@ -41,15 +41,57 @@ namespace Project
 
                 //prg.FirstChallange("MWRAS32");
 
+                prg.LoadDataToSQLiteDB();
+
             }
             catch (Exception ex)
             {
                 //Show error
-                prg.DisplayError(ex.Message);
+                prg.DisplayError(ex);
             }
 
             //Do not close cmd untill user press enter
             Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Load data from MS SQL DB into SQLite DB
+        /// </summary>
+        private void LoadDataToSQLiteDB()
+        {
+            Console.WriteLine("Loading data into SQLite DB:\n");
+
+            //AddCustomers();
+
+            //contextSQLite.AddRange(context.SalesGroup);
+            //contextSQLite.AddRange(context.Salesperson);
+            //contextSQLite.AddRange(context.Order);
+            //contextSQLite.AddRange(context.Product);
+            //contextSQLite.AddRange(context.OrderItem);
+
+            contextSQLite.SaveChanges();
+            Console.WriteLine("Done\n");
+        }
+
+        /// <summary>
+        /// Load data from Customer into CustomerSQLite
+        /// </summary>
+        private void AddCustomers()
+        {
+            context.Customer.Load();
+
+            foreach (Customer item in context.Customer.Local.ToList())
+            {
+                contextSQLite.Add(new CustomerSQLite { StrFldFirstName = item.StrFldFirstName,
+                                                        StrFldLastName = item.StrFldLastName,
+                                                        StrFldEmail = item.StrFldEmail,
+                                                        StrFldPhone = item.StrFldPhone,
+                                                        StrFldAddress = item.StrFldAddress,
+                                                        StrFldCity = item.StrFldCity,
+                                                        StrFldState = item.StrFldState,
+                                                        StrFldZipcode = item.StrFldZipcode
+                });
+            }
         }
 
         /// <summary>
@@ -240,11 +282,12 @@ namespace Project
         /// Display error (red text on yellow background)
         /// </summary>
         /// <param name="error"></param>
-        private void DisplayError(string error)
+        private void DisplayError(Exception ex)
         {
             ChangeDefaultColorSchema();
 
-            Console.WriteLine($"\n{error}\n");
+            Console.WriteLine($"\n{ex.Message}\n");
+            Console.WriteLine($"\n{ex.StackTrace}\n");
 
             SetDefaultColorSchema();
         }
