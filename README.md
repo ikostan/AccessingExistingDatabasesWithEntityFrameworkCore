@@ -10,7 +10,7 @@ Not every .NET development project starts from scratch. Often you're rewriting a
 * Updating properties and indexes
 * Adding concurrency tokens and timestamps
 * Creating complex relationships
-* Working with non-Microsoft databases such as SQLite and PostgreSQL<br/>
+* Working with non-Microsoft databases such as SQLite<br/>
 
 Source: https://www.lynda.com/Entity-Framework-tutorials
 
