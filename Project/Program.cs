@@ -24,6 +24,8 @@ namespace Project
             prg.context = new HPlusSportsContext(); //MS SQL context
             prg.contextSQLite = new SQLiteDBContext(); //SQLite context
 
+            //prg.context.Database.Log = ((log) => Console.WriteLine(log));
+
             try
             {
                 //prg.GetPersonsStartsFromS();
@@ -61,16 +63,135 @@ namespace Project
         {
             Console.WriteLine("Loading data into SQLite DB:\n");
 
-            //AddCustomers();
+            AddCustomers();
+            AddSalesGroup();
+            AddSalesperson();
+            AddOrder();
+            AddProduct();
+            AddOrderItem();
 
-            //contextSQLite.AddRange(context.SalesGroup);
-            //contextSQLite.AddRange(context.Salesperson);
-            //contextSQLite.AddRange(context.Order);
-            //contextSQLite.AddRange(context.Product);
-            //contextSQLite.AddRange(context.OrderItem);
+            Console.WriteLine("Done\n");
+        }
+
+        /// <summary>
+        /// Load data from OrderItem into OrderItemSQLite
+        /// </summary>
+        private void AddOrderItem()
+        {
+            Console.WriteLine("Loading data into SQLite >>> OrderItem");
+
+            context.OrderItem.Load();
+
+            foreach (OrderItem item in context.OrderItem.Local.ToList())
+            {
+                contextSQLite.Add(new OrderItemSQLite
+                {
+                    OrderItemId = item.OrderItemId,
+                    OrderId = item.OrderId,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity
+                });
+            }
 
             contextSQLite.SaveChanges();
-            Console.WriteLine("Done\n");
+        }
+
+        /// <summary>
+        /// Load data from Product into ProductSQLite
+        /// </summary>
+        private void AddProduct()
+        {
+            Console.WriteLine("Loading data into SQLite >>> Product");
+
+            context.Product.Load();
+
+            foreach (Product item in context.Product.Local.ToList())
+            {
+                contextSQLite.Add(new ProductSQLite
+                {
+                    ProductId = item.ProductId,
+                    ProductName = item.ProductName,
+                    Size = item.Size,
+                    Variety = item.Variety,
+                    Price = item.Price,
+                    Status = item.Status
+                });
+            }
+
+            contextSQLite.SaveChanges();
+        }
+
+        /// <summary>
+        /// Load data from Order into OrderSQLite
+        /// </summary>
+        private void AddOrder()
+        {
+            Console.WriteLine("Loading data into SQLite >>> Order");
+
+            context.Order.Load();
+
+            foreach (Order item in context.Order.Local.ToList())
+            {
+                //[OrderID], [OrderDate], [TotalDue], [Status], [CustomerID], [SalespersonID], [CreatedDate]
+
+                contextSQLite.Add(new OrderSQLite
+                {
+                    OrderId = item.OrderId,
+                    OrderDate = item.OrderDate,
+                    TotalDue = item.TotalDue,
+                    Status = item.Status,
+                    CustomerId = item.CustomerId,
+                    SalespersonId = item.SalespersonId,
+                    CreatedDate = item.CreatedDate
+                });
+            }
+
+            contextSQLite.SaveChanges();
+        }
+
+        /// <summary>
+        /// Load data from Salesperson into SalespersonSQLite
+        /// </summary>
+        private void AddSalesperson()
+        {
+            Console.WriteLine("Loading data into SQLite >>> Salesperson");
+
+            context.Salesperson.Load();
+
+            foreach (Salesperson item in context.Salesperson.Local.ToList())
+            {
+                contextSQLite.Add(new SalespersonSQLite
+                {
+                    SalespersonId = item.SalespersonId,
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    Email = item.Email,
+                    Phone = item.Phone
+                });
+            }
+
+            contextSQLite.SaveChanges();
+        }
+
+        /// <summary>
+        /// Load data from SalesGroup into SalesGroupSQLite
+        /// </summary>
+        private void AddSalesGroup()
+        {
+            Console.WriteLine("Loading data into SQLite >>> SalesGroup");
+
+            context.SalesGroup.Load();
+
+            foreach (SalesGroup item in context.SalesGroup.Local.ToList())
+            {
+                contextSQLite.Add(new SalesGroupSQLite
+                {
+                    State = item.State,
+                    Type = item.Type,
+                });
+            }
+
+            contextSQLite.SaveChanges();
         }
 
         /// <summary>
@@ -78,11 +199,14 @@ namespace Project
         /// </summary>
         private void AddCustomers()
         {
+            Console.WriteLine("Loading data into SQLite >>> Customer");
+
             context.Customer.Load();
 
             foreach (Customer item in context.Customer.Local.ToList())
             {
-                contextSQLite.Add(new CustomerSQLite { StrFldFirstName = item.StrFldFirstName,
+                contextSQLite.Add(new CustomerSQLite {CustomerId = item.CustomerId,
+                                                        StrFldFirstName = item.StrFldFirstName,
                                                         StrFldLastName = item.StrFldLastName,
                                                         StrFldEmail = item.StrFldEmail,
                                                         StrFldPhone = item.StrFldPhone,
@@ -92,6 +216,8 @@ namespace Project
                                                         StrFldZipcode = item.StrFldZipcode
                 });
             }
+
+            contextSQLite.SaveChanges();
         }
 
         /// <summary>
@@ -288,6 +414,7 @@ namespace Project
 
             Console.WriteLine($"\n{ex.Message}\n");
             Console.WriteLine($"\n{ex.StackTrace}\n");
+            Console.WriteLine($"\nInner exception: \n{ex.InnerException}\n");
 
             SetDefaultColorSchema();
         }
