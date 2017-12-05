@@ -8,8 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 
-
-namespace Project.EFClasses
+namespace Project.SQLite
 {
     class SQLiteDBContext : HPlusSportsContextSQLite
     {
