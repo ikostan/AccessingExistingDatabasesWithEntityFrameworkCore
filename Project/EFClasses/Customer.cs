@@ -45,7 +45,7 @@ namespace Project.EFClasses
         public string StrFldZipcode { get; set; }
 
         [DisplayName("Full Name")]
-        public string CmpLastFirst { get; set; }
+        public string CmpLastFirst { get; private set; } //Make set as private in order to avoid updates
 
         public ICollection<Order> Order { get; set; }
     }

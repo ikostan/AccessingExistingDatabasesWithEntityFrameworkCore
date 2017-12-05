@@ -33,6 +33,8 @@ namespace Project
                 //prg.NavigationDemo("CA");
                 //prg.NavigationDemo(120);
 
+                //prg.WorkWithComputedColumn();
+
             }
             catch (Exception ex)
             {
@@ -42,6 +44,37 @@ namespace Project
 
             //Do not close cmd untill user press enter
             Console.ReadKey();
+        }
+
+        /// <summary>
+        /// How to work with computed column example
+        /// </summary>
+        private void WorkWithComputedColumn()
+        {
+            //Get calculated name and display it
+            var customer = context.Customer.Skip(2).First();
+            Console.WriteLine($"{customer.CmpLastFirst}");
+
+            //Preserve original name
+            string original = customer.StrFldFirstName;
+
+            //Change first name + do not save changes and display calculated name again
+            customer.StrFldFirstName = "Pueblo";
+            Console.WriteLine($"{customer.CmpLastFirst}");
+
+            //Save changes and display calculated name
+            context.SaveChanges();
+            Console.WriteLine($"{customer.CmpLastFirst}");
+
+            //Get back to original name
+            customer.StrFldFirstName = original;
+            context.SaveChanges();
+
+            //Change calculated field, save changes and display calculated name again => invalid operation
+            //Fuxed by setting SET property as private inside Customer model
+            //customer.CmpLastFirst = "First Last";
+            //context.SaveChanges();
+            //Console.WriteLine($"{customer.CmpLastFirst}");
         }
 
         /// <summary>

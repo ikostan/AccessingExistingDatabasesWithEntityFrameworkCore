@@ -33,7 +33,8 @@ namespace Project.EFClasses
                 entity.Property(e => e.CmpLastFirst)
                     .HasColumnName("cmp_LastFirst")
                     .HasColumnType("varchar(102)")
-                    .HasComputedColumnSql("(([str_fld_LastName]+', ')+[str_fld_FirstName])");
+                    .HasComputedColumnSql("(([str_fld_LastName]+', ')+[str_fld_FirstName])")
+                    .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.StrFldAddress)
                     .HasColumnName("str_fld_Address")
