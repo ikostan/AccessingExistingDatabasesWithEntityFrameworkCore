@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.IO;
 
 namespace Project
 {
@@ -35,7 +36,8 @@ namespace Project
 
                 //prg.WorkWithComputedColumn();
 
-                prg.FirstChallange("MWRAS32");
+                //prg.FirstChallange("MWRAS32");
+
             }
             catch (Exception ex)
             {

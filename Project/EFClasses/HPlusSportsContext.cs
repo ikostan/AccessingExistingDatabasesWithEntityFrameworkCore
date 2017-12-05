@@ -215,13 +215,23 @@ namespace Project.EFClasses
 
                 entity.Property(e => e.Phone).HasColumnType("varchar(50)");
 
+                //T-SQL format:
+                //entity.Property(e => e.SalesGroupState)
+                //    .IsRequired()
+                //    .HasMaxLength(2)
+                //    .HasDefaultValueSql("(N'CA')");
+
+                //SQLite format:
                 entity.Property(e => e.SalesGroupState)
                     .IsRequired()
                     .HasMaxLength(2)
-                    .HasDefaultValueSql("(N'CA')");
+                    .HasDefaultValue("CA");
 
-                entity.Property(e => e.SalesGroupType).HasDefaultValueSql("((1))");
+                //T-SQL format:
+                //entity.Property(e => e.SalesGroupType).HasDefaultValueSql("((1))");
 
+                //SQLite format:
+                entity.Property(e => e.SalesGroupType).HasDefaultValueSql(1);
 
                 entity.Ignore(e => e.FirstName); //Ignore this field (was created manualy) while maping to DB
 

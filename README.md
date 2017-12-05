@@ -80,7 +80,7 @@ dotnet ef migrations add <migration_name>
 ef migrations remove
 ```
 
-## How add a new project reference:<br/>
+## How to add a new project reference:<br/>
 - Go to "Solution Explorer"
 - Right click on project name 
 - Select "Edit Project.csproj", see screenshot 4
