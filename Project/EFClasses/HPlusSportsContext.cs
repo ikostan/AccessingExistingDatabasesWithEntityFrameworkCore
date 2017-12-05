@@ -231,7 +231,7 @@ namespace Project.EFClasses
                 //entity.Property(e => e.SalesGroupType).HasDefaultValueSql("((1))");
 
                 //SQLite format:
-                entity.Property(e => e.SalesGroupType).HasDefaultValueSql(1);
+                entity.Property(e => e.SalesGroupType).HasDefaultValueSql("1");
 
                 entity.Ignore(e => e.FirstName); //Ignore this field (was created manualy) while maping to DB
 
