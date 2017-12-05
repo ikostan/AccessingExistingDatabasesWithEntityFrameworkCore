@@ -11,14 +11,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Project.EFClasses
 {
-    class SQLiteDBContext : HPlusSportsContext
+    class SQLiteDBContext : HPlusSportsContextSQLite
     {
         //SQLite DB file path: AccessingExistingDatabasesWithEntityFrameworkCore\Project\SQLiteDB\HPlusSports.db
         private const string SQLiteFolder = "\\SQLiteDB\\HPlusSports.db"; 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlite($"Filename={GetProjectPath() + SQLiteFolder}");
@@ -31,11 +30,7 @@ namespace Project.EFClasses
         /// <returns></returns>
         private string GetProjectPath()
         {
-            string path = "";
-
-            path = Directory.GetCurrentDirectory();
-
-            return path;
+            return Directory.GetCurrentDirectory();
         }
     }
 }

@@ -2,19 +2,19 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Project.EFClasses
+namespace Project.SQLite
 {
-    public partial class HPlusSportsContext : DbContext
+    public partial class HPlusSportsContextSQLite : DbContext
     {
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Order> Order { get; set; }
-        public virtual DbSet<OrderItem> OrderItem { get; set; }
-        public virtual DbSet<SalesGroup> SalesGroup { get; set; }
-        public virtual DbSet<Salesperson> Salesperson { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<CustomerSQLite> CustomerSQLite { get; set; }
+        public virtual DbSet<OrderSQLite> OrderSQLite { get; set; }
+        public virtual DbSet<OrderItemSQLite> OrderItemSQLite { get; set; }
+        public virtual DbSet<SalesGroupSQLite> SalesGroupSQLite { get; set; }
+        public virtual DbSet<SalespersonSQLite> SalespersonSQLite { get; set; }
+        public virtual DbSet<ProductSQLite> ProductSQLite { get; set; }
 
         //PerishableProduct is custom class, extends from Product
-        public virtual DbSet<PerishableProduct> PerishableProduct { get; set; }
+        public virtual DbSet<PerishableProductSQLite> PerishableProductSQLite { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,15 +26,16 @@ namespace Project.EFClasses
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>(entity =>
+            modelBuilder.Entity<CustomerSQLite>(entity =>
             {
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
-                entity.Property(e => e.CmpLastFirst)
-                    .HasColumnName("cmp_LastFirst")
-                    .HasColumnType("varchar(102)")
-                    .HasComputedColumnSql("(([str_fld_LastName]+', ')+[str_fld_FirstName])")
-                    .ValueGeneratedOnAddOrUpdate();
+                //Not supported by SQLite
+                //entity.Property(e => e.CmpLastFirst)
+                //    .HasColumnName("cmp_LastFirst")
+                //    .HasColumnType("varchar(102)")
+                //    .HasComputedColumnSql("(([str_fld_LastName]+', ')+[str_fld_FirstName])")
+                //    .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.StrFldAddress)
                     .HasColumnName("str_fld_Address")
@@ -73,7 +74,7 @@ namespace Project.EFClasses
                     .HasColumnType("varchar(50)");
             });
 
-            modelBuilder.Entity<Order>(entity =>
+            modelBuilder.Entity<OrderSQLite>(entity =>
             {
                 entity.HasIndex(e => e.OrderDate)
                     .HasName("IX_Order");
@@ -86,11 +87,12 @@ namespace Project.EFClasses
 
                 entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
-                entity.Property(e => e.LastUpdate)
-                    .IsRequired()
-                    .HasColumnType("timestamp")
-                    .IsConcurrencyToken()
-                    .ValueGeneratedOnAddOrUpdate();
+                //Not supported by SQLite
+                //entity.Property(e => e.LastUpdate)
+                //    .IsRequired()
+                //    .HasColumnType("timestamp")
+                //    .IsConcurrencyToken()
+                //    .ValueGeneratedOnAddOrUpdate();
 
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
@@ -103,20 +105,20 @@ namespace Project.EFClasses
 
                 entity.Property(e => e.TotalDue).HasColumnType("money");
 
-                entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.Order)
+                entity.HasOne(d => d.CustomerSQLite)
+                    .WithMany(p => p.OrderSQLite)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Order_Customer");
 
-                entity.HasOne(d => d.Salesperson)
-                    .WithMany(p => p.Order)
+                entity.HasOne(d => d.SalespersonSQLite)
+                    .WithMany(p => p.OrderSQLite)
                     .HasForeignKey(d => d.SalespersonId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Order_Salesperson");
             });
 
-            modelBuilder.Entity<OrderItem>(entity =>
+            modelBuilder.Entity<OrderItemSQLite>(entity =>
             {
                 entity.Property(e => e.OrderItemId).HasColumnName("OrderItemID");
 
@@ -127,13 +129,13 @@ namespace Project.EFClasses
                     .HasColumnName("ProductID")
                     .HasMaxLength(10);
 
-                entity.HasOne(d => d.Order)
-                    .WithMany(p => p.OrderItem)
+                entity.HasOne(d => d.OrderSQLite)
+                    .WithMany(p => p.OrderItemSQLite)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_OrderItem_Order");
 
-                entity.HasOne(d => d.Product)
+                entity.HasOne(d => d.ProductSQLite)
                     //.WithMany(p => p.OrderItem) //commented out since this navigation is no longer exist. Replaced by empty .WithMany() navigation
                     .WithMany()
                     .HasForeignKey(d => d.ProductId)
@@ -141,7 +143,7 @@ namespace Project.EFClasses
                     .HasConstraintName("FK_OrderItem_Product1");
             });
 
-            modelBuilder.Entity<Product>(entity =>
+            modelBuilder.Entity<ProductSQLite>(entity =>
             {
                 entity.Property(e => e.ProductId)
                     .HasColumnName("ProductID")
@@ -149,8 +151,8 @@ namespace Project.EFClasses
 
                 //Must be added manualy cince we separated between Perishable and Product
                 entity.HasDiscriminator<bool>("Perishable")
-                    .HasValue<Product>(false)
-                    .HasValue<PerishableProduct>(true)
+                    .HasValue<ProductSQLite>(false)
+                    .HasValue<PerishableProductSQLite>(true)
                 ;
 
                 //See Discriminator above (no longer need this definition)
@@ -169,7 +171,7 @@ namespace Project.EFClasses
                 entity.Property(e => e.Variety).HasColumnType("varchar(50)");
             });
 
-            modelBuilder.Entity<SalesGroup>(entity =>
+            modelBuilder.Entity<SalesGroupSQLite>(entity =>
             {
                 entity.HasIndex(e => new { e.State, e.Type })
                     .HasName("IX_StateType")
@@ -181,12 +183,12 @@ namespace Project.EFClasses
 
                 //Relationships between salesperson and SalesGroup. 
                 //Has principal key instead of FK since there is no actual relationships between those tables.
-                entity.HasMany((e) => e.SalesPeople)
-                .WithOne((s) => s.SalesGroup)
+                entity.HasMany((e) => e.SalesPeopleSQLite)
+                .WithOne((s) => s.SalesGroupSQLite)
                 .HasPrincipalKey((o) => new { o.State, o.Type});
             });
 
-            modelBuilder.Entity<Salesperson>(entity =>
+            modelBuilder.Entity<SalespersonSQLite>(entity =>
             {
                 entity.Property(e => e.SalespersonId)
                     .HasColumnName("SalespersonID")
@@ -216,22 +218,22 @@ namespace Project.EFClasses
                 entity.Property(e => e.Phone).HasColumnType("varchar(50)");
 
                 //T-SQL format:
-                entity.Property(e => e.SalesGroupState)
-                    .IsRequired()
-                    .HasMaxLength(2)
-                    .HasDefaultValueSql("(N'CA')");
-
-                //SQLite format:
                 //entity.Property(e => e.SalesGroupState)
                 //    .IsRequired()
                 //    .HasMaxLength(2)
-                //    .HasDefaultValue("CA");
-
-                //T-SQL format:
-                entity.Property(e => e.SalesGroupType).HasDefaultValueSql("((1))");
+                //    .HasDefaultValueSql("(N'CA')");
 
                 //SQLite format:
-                //entity.Property(e => e.SalesGroupType).HasDefaultValueSql("1");
+                entity.Property(e => e.SalesGroupState)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .HasDefaultValue("CA");
+
+                //T-SQL format:
+                //entity.Property(e => e.SalesGroupType).HasDefaultValueSql("((1))");
+
+                //SQLite format:
+                entity.Property(e => e.SalesGroupType).HasDefaultValueSql("1");
 
                 entity.Ignore(e => e.FirstName); //Ignore this field (was created manualy) while maping to DB
 
