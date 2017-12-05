@@ -35,6 +35,7 @@ namespace Project
 
                 //prg.WorkWithComputedColumn();
 
+                prg.FirstChallange("MWRAS32");
             }
             catch (Exception ex)
             {
@@ -44,6 +45,59 @@ namespace Project
 
             //Do not close cmd untill user press enter
             Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Challenge:
+        /// 
+        /// Let's start in the main program and remove the code from previous materials. 
+        /// Product MWRAS32 had just been recalled, and we need to notify all of the customers who purchased it. 
+        /// Let's return a list of customer names, last comma first, with phone numbers to help perform this task. 
+        /// For an extra challenge, sort the customers by last name and ensure that there are no duplicates in the list. 
+        /// Product ID: "MWRAS32"
+        /// 
+        /// </summary>
+        private void FirstChallange(string prdId)
+        {
+            var customers =
+                context.Product
+                    .Where((p) => p.ProductId == prdId)
+                    .Join(context.OrderItem,
+                            pid => pid.ProductId,
+                            ord => ord.ProductId,
+                            (pid, ord) => new { ProductId = pid.ProductId, OrderId = ord.OrderId, CustId = ord.Order.CustomerId }
+                        )
+                    .Join(context.Customer,
+                            pid => pid.CustId,
+                            cst => cst.CustomerId,
+                            (pid, cst) => new { FirstName = cst.StrFldFirstName, LastName = cst.StrFldLastName, PhoneNum = cst.StrFldPhone }
+                        )
+                     .OrderBy((p) => p.LastName)
+                    .Distinct()
+                    .ToList()
+                ;
+
+            foreach (var item in customers)
+            {
+                Console.WriteLine($"{item.LastName}, {item.FirstName} {item.PhoneNum}");
+            }
+
+            //Some internal test
+            //var products =
+            //    context.Order
+            //        .Where((c) => c.Customer.StrFldLastName == "Adams" && c.Customer.StrFldFirstName == "Shawn")
+            //        .Join(context.OrderItem,
+            //        ord => ord.OrderId,
+            //        ordItm => ordItm.OrderId,
+            //        (ord, ordItm) => new { ordItm.Product.ProductId }
+            //    )
+            //    ;
+
+            //foreach (var item in products)
+            //{
+            //    Console.WriteLine($"{item.ProductId}");
+            //}
+
         }
 
         /// <summary>
@@ -148,8 +202,8 @@ namespace Project
 
             //Loop in order to display:
             perishableProduct
-                .ForEach((e) => 
-                    Console.WriteLine($"{e.Variety, -10} | {e.ProductId, -8} | {e.ProductName, -8} | {e.ExpirationDays, 10} |"));
+                .ForEach((e) =>
+                    Console.WriteLine($"{e.Variety,-10} | {e.ProductId,-8} | {e.ProductName,-8} | {e.ExpirationDays,10} |"));
         }
 
         /// <summary>
@@ -228,7 +282,7 @@ namespace Project
         /// Generate a new order using default value for DateTime
         /// </summary>
         private void GenerateNewOrder()
-        { 
+        {
             //Default value generation
             //Get initial data:
             var customer = context.Customer.First();            //Get first name from DB
