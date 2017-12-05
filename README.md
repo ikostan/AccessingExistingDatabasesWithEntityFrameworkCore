@@ -81,7 +81,7 @@ ef migrations remove
 ```
 - In order to proceed SQLite migration we have to specify SQLite context object. For that reason please run following command:
 ```
-dotnet ef migrations add Initial -c SqliteDBContext
+dotnet ef migrations add InitialSQLite -c SQLiteDBContext  -v
 ```
 - In order to create SQLite DB, please run:
 ```
