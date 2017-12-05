@@ -65,14 +65,19 @@ namespace Project
                     .Join(context.OrderItem,
                             pid => pid.ProductId,
                             ord => ord.ProductId,
-                            (pid, ord) => new { ProductId = pid.ProductId, OrderId = ord.OrderId, CustId = ord.Order.CustomerId }
+
+                            (pid, ord) => new { ProductId = pid.ProductId,
+                                                OrderId = ord.OrderId,
+                                                CustId = ord.Order.CustomerId }
                         )
                     .Join(context.Customer,
                             pid => pid.CustId,
                             cst => cst.CustomerId,
-                            (pid, cst) => new { FirstName = cst.StrFldFirstName, LastName = cst.StrFldLastName, PhoneNum = cst.StrFldPhone }
+                            (pid, cst) => new { FirstName = cst.StrFldFirstName,
+                                                LastName = cst.StrFldLastName,
+                                                PhoneNum = cst.StrFldPhone }
                         )
-                     .OrderBy((p) => p.LastName)
+                    .OrderBy((p) => p.LastName)
                     .Distinct()
                     .ToList()
                 ;

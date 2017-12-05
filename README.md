@@ -79,3 +79,15 @@ dotnet ef migrations add <migration_name>
 ```
 ef migrations remove
 ```
+
+## How add a new project reference:<br/>
+- Go to "Solution Explorer"
+- Right click on project name 
+- Select "Edit Project.csproj", see screenshot 4
+- Edit Project.csproj file, see screenshot 5
+
+### Screenshot 4:
+![GUI](https://github.com/ikostan/AccessingExistingDatabasesWithEntityFrameworkCore/blob/master/Img/project_references_1.PNG?raw=true "GUI screenshot")
+
+### Screenshot 5:
+![GUI](https://github.com/ikostan/AccessingExistingDatabasesWithEntityFrameworkCore/blob/master/Img/project_references_2.PNG?raw=true "GUI screenshot")
